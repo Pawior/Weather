@@ -1,0 +1,49 @@
+body {
+  font-family: "Monda", sans-serif;
+}
+
+.container-fluid {
+  background-image: url("img/bg2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.navbar-brand {
+  font-size: 3vw;
+}
+
+@media (min-width: 992px) {
+  .navbar-brand {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-brand {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .city {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 313px) {
+  .city {
+    font-size: 0.7rem;
+    left: 0.3%;
+  }
+  .navbar-toggler {
+    margin: auto;
+  }
+}
+/*# sourceMappingURL=style.css.map */

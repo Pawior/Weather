@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Ja" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>tytul</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monda&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <script
+      src="https://kit.fontawesome.com/85fd06365b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/85fd06365b.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monda:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand h1" href="#"> Pogoda dzisiejsza</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarContent"
+      >
+        <span class="navbar-toggler-icon"> </span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarContent"
+      >
+        <form class="form-inline d-flex justify-content-center">
+          <input
+            class="form-control"
+            type="search"
+            placeholder="Wpisz miasto"
+          />
+          <button class="btn btn-outline-dark m-1" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+      </div>
+    </nav>
+    <!-- Weather info -->
+    <div class="container-fluid bg" style="height: 50vh">
+      <div class="position-absolute city p-0 m-0">
+        <p class="text-light city">Warszawa<span class="date"> </span></p>
+      </div>
+      <!-- <div class="row d-inline">
+        <div class="col-md-12 p-0">
+          <p class="text-light px-1">Warszawa<span class="date"> </span></p>
+        </div>
+      </div> -->
+      <!-- <div class="container d-inline h-70"> -->
+      <div class="row h-100">
+        <div
+          class="col-md-6 text-center d-flex align-items-center justify-content-center"
+        >
+          <p class="display-3 text-light">
+            <i class="fas fa-cloud text-light"></i>
+            <span class="temp"> 12°C </span>
+          </p>
+        </div>
+        <div
+          class="col-md-6 text-center text-light d-flex align-items-center justify-content-center flex-column"
+        >
+          <div class="cisnienie">
+            <p class>
+              <i class="fas fa-tachometer-alt"></i>
+
+              Ciśnienie: <span class="cisnienieP"> </span>
+            </p>
+          </div>
+          <!-- <div class="wiatr">
+            <p>
+              <i class="fas fa-wind"></i> Wiatr: <span class="wiatrP"> </span>
+            </p>
+          </div> -->
+          <div class="wilgotnosc">
+            <p>
+              <img
+                src="https://img.icons8.com/metro/22/ffffff/humidity.png"
+              />Wilgotność: <span class="wilgotnoscP"> </span>
+            </p>
+          </div>
+          <div class="smog">
+            <p>
+              <i class="fas fa-smog"></i> Zanieczyszczenie PM 2.5:
+              <span class="smogP"> </span>
+              <p class="adviceP text-success"></p>
+              
+            </p>
+            
+          </div>
+          <div class="advice">
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- </div> -->
+    </div>
+    <!-- Added scripts -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js"></script>
+  </body>
+</html>
