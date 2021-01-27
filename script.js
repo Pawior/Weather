@@ -6,6 +6,12 @@ const wiatr = document.querySelector(".wiatrP");
 const wilgotnosc = document.querySelector(".wilgotnoscP");
 const smog = document.querySelector(".smogP");
 const advice = document.querySelector(".adviceP");
+const form = document.querySelector(".btn");
+
+function handleform(event) {
+  event.preventDefault();
+}
+form.addEventListener("click", handleform);
 
 date.innerHTML = `, ${today}`;
 cisnienie.innerHTML = `, ${today}`;
