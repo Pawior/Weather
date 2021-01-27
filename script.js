@@ -28,7 +28,7 @@ form.addEventListener("click", handleform);
 // console.log(today);
 // Pobieranie danych domyślnie po włączeniu strony
 fetch(
-  "TESThttps://airapi.airly.eu/v2/TESTmeasurements/installation?installationId=8824TEST",
+  "https://airapi.airly.eu/v2/measurements/installation?installationId=8824",
   {
     method: "GET",
     headers: {
