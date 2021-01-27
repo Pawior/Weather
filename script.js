@@ -9,24 +9,26 @@ const advice = document.querySelector(".adviceP");
 const form = document.querySelector(".btn");
 const cityName = document.querySelector(".city");
 const wrotenCity = document.querySelector(".form-control");
-const Url = "https://api.openweathermap.org/data/2.5/weather?q=";
-const Key = "&appid=f2799a9007994daa45c68492bae50498&units=metric";
+const url = "https://api.openweathermap.org/data/2.5/weather?q=";
+const key = "&appid=f2799a9007994daa45c68492bae50498&units=metric";
 const apiKod = "http://kodpocztowy.intami.pl/city/";
 const city = wrotenCity;
 // End of variables
+
+// Funkcja, żeby button nie odświeżał strony po kliknięciu go
 function handleform(event) {
   event.preventDefault();
 }
 form.addEventListener("click", handleform);
 
-date.innerHTML = `, ${today}`;
-cisnienie.innerHTML = `, ${today}`;
-wilgotnosc.innerHTML = `, ${today}`;
-smog.innerHTML = `, ${today}`;
-console.log(today);
-
+// date.innerHTML = `, ${today}`; DO WYRZUCENIA
+// cisnienie.innerHTML = `, ${today}`;
+// wilgotnosc.innerHTML = `, ${today}`;
+// smog.innerHTML = `, ${today}`;
+// console.log(today);
+// Pobieranie danych domyślnie po włączeniu strony
 fetch(
-  "https://airapi.airly.eu/v2/measurements/installation?installationId=8824TEST",
+  "TESThttps://airapi.airly.eu/v2/TESTmeasurements/installation?installationId=8824TEST",
   {
     method: "GET",
     headers: {
@@ -47,10 +49,10 @@ fetch(
     smog.innerHTML = `${Math.round(data.current.values[1].value)} µg/m³`;
     // advice.innerHTML = `${data.current.indexes[0].advice} `; Brak w api openweather
   });
-
+// Funkcja znajdywania po mieście
 function changeCity(apiUrl, apiKey, searchParam) {
-  cityName.innerHTML = `${city.value}, ${today}`;
-  fetch(apiUrl + city.value + apiKey)
+  cityName.innerHTML = `${searchParam.value}, ${today}`;
+  fetch(apiUrl + searchParam.value + apiKey)
     .then((response) => {
       return response.json();
     })
@@ -81,12 +83,46 @@ function changeCity(apiUrl, apiKey, searchParam) {
   //   })
   //   .then((data) => {
   //     console.log(data);
+  //     const cityFromPostal = data[0].miejscowosc;
+
   //   });
 }
-function changePostal(Url, Key) {}
+
+// Funkcja znajdywania po kodzie pocztowym
+function changePostal(apiUrl, apiKey, searchParam) {
+  fetch(`http://kodpocztowy.intami.pl/api/${searchParam.value}`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      const cityFromPostal = data[0].miejscowosc;
+      cityName.innerHTML = `${cityFromPostal}, ${today}`;
+      fetch(apiUrl + cityFromPostal + apiKey)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          temp.innerHTML = `${Math.round(data.main.temp)} °C`;
+          wilgotnosc.innerHTML = `${Math.round(data.main.humidity)} %`;
+          cisnienie.innerHTML = `${Math.round(data.main.pressure)} hPa`;
+        });
+    });
+}
+// Funkcja sprawdzająca czy wpisany tekst ma numer w sobie, czyli czy to jest kod pocztowy czy nazwa miasta
+function checkRequest(arg) {
+  return /\d/g.test(arg.value);
+}
+// Event po kliknięciu buttona
 form.addEventListener("click", function () {
-  changeCity(Url, Key, city);
+  if (checkRequest(city)) {
+    changePostal(url, key, city);
+  } else {
+    changeCity(url, key, city);
+  }
 });
+// Linki do api
 //  "https://api.openweathermap.org/data/2.5/weather?q=" +
 // city.value +
 // "&appid=f2799a9007994daa45c68492bae50498&units=metric"
