@@ -61,7 +61,7 @@ function changeCity(apiUrl, apiKey, searchParam) {
       const coordLat = data.coord.lat;
       // console.log(coordLon + " ///" + coordLat);
       fetch(
-        `http://api.openweathermap.org/data/2.5/air_pollution?lat=${coordLat}&lon=${coordLon}&appid=f2799a9007994daa45c68492bae50498`
+        `https://api.openweathermap.org/data/2.5/air_pollution?lat=${coordLat}&lon=${coordLon}&appid=f2799a9007994daa45c68492bae50498`
       )
         .then((response) => {
           return response.json();
