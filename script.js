@@ -11,7 +11,7 @@ const cityName = document.querySelector(".city");
 const wrotenCity = document.querySelector(".form-control");
 const url = "https://api.openweathermap.org/data/2.5/weather?q=";
 const key = "&appid=f2799a9007994daa45c68492bae50498&units=metric";
-const apiKod = "https://kodpocztowy.intami.pl/city/";
+const apiKod = "http://kodpocztowy.intami.pl/city/";
 const city = wrotenCity;
 // End of variables
 
@@ -86,7 +86,7 @@ function changeCity(apiUrl, apiKey, searchParam) {
 
 // Funkcja znajdywania po kodzie pocztowym
 function changePostal(apiUrl, apiKey, searchParam) {
-  fetch(`https://kodpocztowy.intami.pl/api/${searchParam.value}`)
+  fetch(`http://kodpocztowy.intami.pl/api/${searchParam.value}`)
     .then((response) => {
       return response.json();
     })
