@@ -21,8 +21,8 @@ function handleform(event) {
 }
 form.addEventListener("click", handleform);
 
-// date.innerHTML = `, ${today}`; DO WYRZUCENIA
-// cisnienie.innerHTML = `, ${today}`;
+date.innerHTML = `, ${today}`;
+// cisnienie.innerHTML = `, ${today}`; DO WYRZUCENIA
 // wilgotnosc.innerHTML = `, ${today}`;
 // smog.innerHTML = `, ${today}`;
 // console.log(today);
