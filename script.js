@@ -10,6 +10,7 @@ const form = document.querySelector(".btn");
 const cityName = document.querySelector(".city");
 const wrotenCity = document.querySelector(".form-control");
 const url = "https://api.openweathermap.org/data/2.5/weather?q=";
+const urlLonLat = "https://api.openweathermap.org/data/2.5/weather?";
 const key = "&appid=f2799a9007994daa45c68492bae50498&units=metric";
 const apiKod = "http://kodpocztowy.intami.pl/city/";
 const city = wrotenCity;
@@ -20,44 +21,60 @@ function handleform(event) {
   event.preventDefault();
 }
 form.addEventListener("click", handleform);
+// Get Geolocation
+navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+function geoSuccess(pos) {
+  const position = pos.coords;
+  console.log(position.latitude);
+  console.log(position.longitude);
+  const searchParam = `lat=${position.latitude}&lon=${position.longitude}`;
+  changeCity(urlLonLat, key, searchParam);
+}
+function geoError() {
+  alert("Problem with geolocation");
+}
 
+// function Geolocation(){
+//   if (navigator.geolocation){
+
+//   }
+//   else {
+//     alert("It's problem with your location")
+//   }
+// }
+// function getPosition(){
+//   c
+// }
+// // Data
 date.innerHTML = `, ${today}`; // Ustawienie daty
 // Pobieranie danych domyślnie po włączeniu strony
-fetch(
-  "https://airapi.airly.eu/v2/measurements/installation?installationId=8824",
-  {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      apikey: "jXFSvsuig02RrkGOoHoAXTUbnbw5wiHo",
-    },
-  }
-)
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    console.log(data);
-    console.log(data.current.values[5].value);
-    temp.innerHTML = `${Math.round(data.current.values[5].value)} °C`;
-    pressure.innerHTML = `${Math.round(data.current.values[3].value)} hPa`;
-    humidity.innerHTML = `${Math.round(data.current.values[4].value)} %`;
-    smog.innerHTML = `${Math.round(data.current.values[1].value)} µg/m³`;
-    // advice.innerHTML = `${data.current.indexes[0].advice} `; Brak w api openweather
-  });
-fetch(
-  "https://app.zipcodebase.com/api/v1/search?apikey=625df870-6187-11eb-a3e5-53ae15918210&codes=32-005"
-)
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    console.log(data.results["32-005"][0].city);
-  });
+// fetch(
+//   "https://airapi.airly.eu/v2/measurements/installation?installationId=8824",
+//   {
+//     method: "GET",
+//     headers: {
+//       Accept: "application/json",
+//       apikey: "jXFSvsuig02RrkGOoHoAXTUbnbw5wiHo",
+//     },
+//   }
+// )
+//   .then((response) => {
+//     return response.json();
+//   })
+//   .then((data) => {
+//     console.log(data);
+//     console.log(data.current.values[5].value);
+//     temp.innerHTML = `${Math.round(data.current.values[5].value)} °C`;
+//     pressure.innerHTML = `${Math.round(data.current.values[3].value)} hPa`;
+//     humidity.innerHTML = `${Math.round(data.current.values[4].value)} %`;
+//     smog.innerHTML = `${Math.round(data.current.values[1].value)} µg/m³`;
+//     // advice.innerHTML = `${data.current.indexes[0].advice} `; Brak w api openweather
+//   });
+
 // Funkcja znajdywania po mieście
-function changeCity(apiUrl, apiKey, searchParam) {
-  cityName.innerHTML = `${searchParam.value}, ${today}`;
-  fetch(apiUrl + searchParam.value + apiKey)
+function changeCity(apiUrl, apiKey, searchParam, searchParamLontitude) {
+  // cityName.innerHTML = `${searchParam}, ${today}`;
+  fetch(apiUrl + searchParam + apiKey)
     .then((response) => {
       return response.json();
     })
@@ -68,6 +85,7 @@ function changeCity(apiUrl, apiKey, searchParam) {
       pressure.innerHTML = `${Math.round(data.main.pressure)} hPa`;
       const coordLon = data.coord.lon;
       const coordLat = data.coord.lat;
+      cityName.innerHTML = `${data.name}, ${today}`;
       // console.log(coordLon + " ///" + coordLat);
       fetch(
         `https://api.openweathermap.org/data/2.5/air_pollution?lat=${coordLat}&lon=${coordLon}&appid=f2799a9007994daa45c68492bae50498`
@@ -141,7 +159,7 @@ form.addEventListener("click", function () {
   if (checkRequest(city)) {
     changePostal(url, key, city);
   } else {
-    changeCity(url, key, city);
+    changeCity(url, key, city.value);
   }
 });
 // Linki do api
