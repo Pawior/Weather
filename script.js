@@ -23,16 +23,13 @@ form.addEventListener("click", handleform);
 
 date.innerHTML = `, ${today}`; // Ustawienie daty
 // Pobieranie danych domyślnie po włączeniu strony
-fetch(
-  "https://airapi.airly.eu/v2/measurements/installation?installationId=8824",
-  {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      apikey: "jXFSvsuig02RrkGOoHoAXTUbnbw5wiHo",
-    },
-  }
-)
+fetch("://airapi.airly.eu/v2/measurements/installation?installationId=8824", {
+  method: "GET",
+  headers: {
+    Accept: "application/json",
+    apikey: "jXFSvsuig02RrkGOoHoAXTUbnbw5wiHo",
+  },
+})
   .then((response) => {
     return response.json();
   })
@@ -44,6 +41,15 @@ fetch(
     humidity.innerHTML = `${Math.round(data.current.values[4].value)} %`;
     smog.innerHTML = `${Math.round(data.current.values[1].value)} µg/m³`;
     // advice.innerHTML = `${data.current.indexes[0].advice} `; Brak w api openweather
+  });
+fetch(
+  "https://app.zipcodebase.com/api/v1/search?apikey=625df870-6187-11eb-a3e5-53ae15918210&codes=32-005"
+)
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data.results["32-005"][0].city);
   });
 // Funkcja znajdywania po mieście
 function changeCity(apiUrl, apiKey, searchParam) {
@@ -73,7 +79,7 @@ function changeCity(apiUrl, apiKey, searchParam) {
           )}  µg/m³`;
         });
     });
-  // fetch(`http://kodpocztowy.intami.pl/api/${city.value}`)
+  // fetch(`http://kodpocztowy.intami.pl/api/${city.value}`) STARE API
   //   .then((response) => {
   //     return response.json();
   //   })
@@ -86,13 +92,15 @@ function changeCity(apiUrl, apiKey, searchParam) {
 
 // Funkcja znajdywania po kodzie pocztowym
 function changePostal(apiUrl, apiKey, searchParam) {
-  fetch(`http://kodpocztowy.intami.pl/api/${searchParam.value}`)
+  fetch(
+    `https://app.zipcodebase.com/api/v1/search?apikey=625df870-6187-11eb-a3e5-53ae15918210&codes=${searchParam.value}`
+  )
     .then((response) => {
       return response.json();
     })
     .then((data) => {
       console.log(data);
-      const cityFromPostal = data[0].miejscowosc;
+      const cityFromPostal = data.results[searchParam.value][0].city;
       cityName.innerHTML = `${cityFromPostal}, ${today}`;
       fetch(apiUrl + cityFromPostal + apiKey)
         .then((response) => {
@@ -103,6 +111,21 @@ function changePostal(apiUrl, apiKey, searchParam) {
           temp.innerHTML = `${Math.round(data.main.temp)} °C`;
           humidity.innerHTML = `${Math.round(data.main.humidity)} %`;
           pressure.innerHTML = `${Math.round(data.main.pressure)} hPa`;
+          const coordLon = data.coord.lon;
+          const coordLat = data.coord.lat;
+          // console.log(coordLon + " ///" + coordLat);
+          fetch(
+            `https://api.openweathermap.org/data/2.5/air_pollution?lat=${coordLat}&lon=${coordLon}&appid=f2799a9007994daa45c68492bae50498`
+          )
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+              smog.innerHTML = `${Math.round(
+                data.list[0].components.pm2_5
+              )}  µg/m³`;
+            });
         });
     });
 }
@@ -129,3 +152,5 @@ form.addEventListener("click", function () {
 //
 // 8824 z https://airapi.airly.eu/v2/installations/nearest?lat=52.242802&lng=20.983483&maxDistanceKM=5&maxResults=5
 // https://airapi.airly.eu/v2/measurements/installation?installationId=8824
+// API KODY POCZTOWE HTTPS
+// GET https://app.zipcodebase.com/api/v1/search?apikey=625df870-6187-11eb-a3e5-53ae15918210&codes=10005
