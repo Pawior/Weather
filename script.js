@@ -21,11 +21,7 @@ function handleform(event) {
 }
 form.addEventListener("click", handleform);
 
-date.innerHTML = `, ${today}`;
-// cisnienie.innerHTML = `, ${today}`; DO WYRZUCENIA
-// wilgotnosc.innerHTML = `, ${today}`;
-// smog.innerHTML = `, ${today}`;
-// console.log(today);
+date.innerHTML = `, ${today}`; // Ustawienie daty
 // Pobieranie danych domyślnie po włączeniu strony
 fetch(
   "https://airapi.airly.eu/v2/measurements/installation?installationId=8824",
