@@ -86,7 +86,7 @@ function changeCity(apiUrl, apiKey, searchParam) {
 
 // Funkcja znajdywania po kodzie pocztowym
 function changePostal(apiUrl, apiKey, searchParam) {
-  fetch(`http://kodpocztowy.intami.pl/api/${searchParam.value}`)
+  fetch(`https://kodpocztowy.intami.pl/api/${searchParam.value}`)
     .then((response) => {
       return response.json();
     })
