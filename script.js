@@ -1,9 +1,9 @@
 const today = new Date().toLocaleDateString();
 const date = document.querySelector(".date");
 const temp = document.querySelector(".temp");
-const cisnienie = document.querySelector(".cisnienieP");
+const pressure = document.querySelector(".pressureP");
 const wiatr = document.querySelector(".wiatrP");
-const wilgotnosc = document.querySelector(".wilgotnoscP");
+const humidity = document.querySelector(".humidityP");
 const smog = document.querySelector(".smogP");
 const advice = document.querySelector(".adviceP");
 const form = document.querySelector(".btn");
@@ -40,8 +40,8 @@ fetch(
     console.log(data);
     console.log(data.current.values[5].value);
     temp.innerHTML = `${Math.round(data.current.values[5].value)} °C`;
-    cisnienie.innerHTML = `${Math.round(data.current.values[3].value)} hPa`;
-    wilgotnosc.innerHTML = `${Math.round(data.current.values[4].value)} %`;
+    pressure.innerHTML = `${Math.round(data.current.values[3].value)} hPa`;
+    humidity.innerHTML = `${Math.round(data.current.values[4].value)} %`;
     smog.innerHTML = `${Math.round(data.current.values[1].value)} µg/m³`;
     // advice.innerHTML = `${data.current.indexes[0].advice} `; Brak w api openweather
   });
@@ -55,8 +55,8 @@ function changeCity(apiUrl, apiKey, searchParam) {
     .then((data) => {
       console.log(data);
       temp.innerHTML = `${Math.round(data.main.temp)} °C`;
-      wilgotnosc.innerHTML = `${Math.round(data.main.humidity)} %`;
-      cisnienie.innerHTML = `${Math.round(data.main.pressure)} hPa`;
+      humidity.innerHTML = `${Math.round(data.main.humidity)} %`;
+      pressure.innerHTML = `${Math.round(data.main.pressure)} hPa`;
       const coordLon = data.coord.lon;
       const coordLat = data.coord.lat;
       // console.log(coordLon + " ///" + coordLat);
@@ -101,8 +101,8 @@ function changePostal(apiUrl, apiKey, searchParam) {
         .then((data) => {
           console.log(data);
           temp.innerHTML = `${Math.round(data.main.temp)} °C`;
-          wilgotnosc.innerHTML = `${Math.round(data.main.humidity)} %`;
-          cisnienie.innerHTML = `${Math.round(data.main.pressure)} hPa`;
+          humidity.innerHTML = `${Math.round(data.main.humidity)} %`;
+          pressure.innerHTML = `${Math.round(data.main.pressure)} hPa`;
         });
     });
 }
