@@ -23,13 +23,16 @@ form.addEventListener("click", handleform);
 
 date.innerHTML = `, ${today}`; // Ustawienie daty
 // Pobieranie danych domyślnie po włączeniu strony
-fetch("://airapi.airly.eu/v2/measurements/installation?installationId=8824", {
-  method: "GET",
-  headers: {
-    Accept: "application/json",
-    apikey: "jXFSvsuig02RrkGOoHoAXTUbnbw5wiHo",
-  },
-})
+fetch(
+  "https://airapi.airly.eu/v2/measurements/installation?installationId=8824",
+  {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      apikey: "jXFSvsuig02RrkGOoHoAXTUbnbw5wiHo",
+    },
+  }
+)
   .then((response) => {
     return response.json();
   })
