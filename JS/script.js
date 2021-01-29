@@ -11,9 +11,12 @@ const cityName = document.querySelector(".city");
 const wrotenCity = document.querySelector(".form-control");
 const url = "https://api.openweathermap.org/data/2.5/weather?q=";
 const urlLonLat = "https://api.openweathermap.org/data/2.5/weather?";
-const key = "&appid=f2799a9007994daa45c68492bae50498&units=metric";
+// const key = "&appid=f2799a9007994daa45c68492bae50498&units=metric"; // Stara zmienna, gdy nie pobierałem z pliku
 const apiKod = "http://kodpocztowy.intami.pl/city/";
 const city = wrotenCity;
+import { apiKey } from "../data/config.js";
+console.log(apiKey);
+const key = apiKey;
 // End of variables
 
 // Funkcja, żeby button nie odświeżał strony po kliknięciu go
