@@ -30,7 +30,7 @@ function counter() {
     seconds = "00";
     // minutes = minutes - 1;
   }
-
+  // TIMER
   if (seconds == 0 && minutes == 0) {
     const cityOnly = document.querySelector(".cityOnly");
     console.log(cityOnly.textContent);
@@ -95,15 +95,6 @@ function changeCity(apiUrl, apiKey, searchParam, searchParamLontitude) {
           )}  µg/m³`;
         });
     });
-  // fetch(`http://kodpocztowy.intami.pl/api/${city.value}`) STARE API
-  //   .then((response) => {
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     console.log(data);
-  //     const cityFromPostal = data[0].miejscowosc;
-
-  //   });
 }
 
 // Funkcja znajdywania po kodzie pocztowym
