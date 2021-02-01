@@ -17,8 +17,33 @@ const city = wrotenCity;
 import { apiKey } from "../data/config.js";
 console.log(apiKey);
 const key = apiKey;
+// counter variables
+let startMinutes = 1;
+let timeCounter = startMinutes * 60;
+const timer = document.querySelector(".time p");
 // End of variables
+setInterval(counter, 1000);
+function counter() {
+  let minutes = Math.floor(timeCounter / 60);
+  let seconds = timeCounter % 60;
+  if (seconds == 0) {
+    seconds = "00";
+    // minutes = minutes - 1;
+  }
 
+  if (seconds == 0 && minutes == 0) {
+    const cityOnly = document.querySelector(".cityOnly");
+    console.log(cityOnly.textContent);
+    changeCity(url, key, cityOnly.textContent);
+    timeCounter = 300;
+  }
+  timeCounter--;
+  if (seconds < 10) {
+    timer.innerHTML = `Aktualizacja za: ${minutes}:0${seconds}`;
+  } else {
+    timer.innerHTML = `Aktualizacja za: ${minutes}:${seconds}`;
+  }
+}
 // Funkcja, żeby button nie odświeżał strony po kliknięciu go
 function handleform(event) {
   event.preventDefault();
@@ -37,42 +62,8 @@ function geoError() {
   alert("Problem with geolocation");
 }
 
-// function Geolocation(){
-//   if (navigator.geolocation){
-
-//   }
-//   else {
-//     alert("It's problem with your location")
-//   }
-// }
-// function getPosition(){
-//   c
-// }
 // // Data
 date.innerHTML = `, ${today}`; // Ustawienie daty
-// Pobieranie danych domyślnie po włączeniu strony
-// fetch(
-//   "https://airapi.airly.eu/v2/measurements/installation?installationId=8824",
-//   {
-//     method: "GET",
-//     headers: {
-//       Accept: "application/json",
-//       apikey: "jXFSvsuig02RrkGOoHoAXTUbnbw5wiHo",
-//     },
-//   }
-// )
-//   .then((response) => {
-//     return response.json();
-//   })
-//   .then((data) => {
-//     console.log(data);
-//     console.log(data.current.values[5].value);
-//     temp.innerHTML = `${Math.round(data.current.values[5].value)} °C`;
-//     pressure.innerHTML = `${Math.round(data.current.values[3].value)} hPa`;
-//     humidity.innerHTML = `${Math.round(data.current.values[4].value)} %`;
-//     smog.innerHTML = `${Math.round(data.current.values[1].value)} µg/m³`;
-//     // advice.innerHTML = `${data.current.indexes[0].advice} `; Brak w api openweather
-//   });
 
 // Funkcja znajdywania po mieście
 function changeCity(apiUrl, apiKey, searchParam, searchParamLontitude) {
@@ -88,7 +79,8 @@ function changeCity(apiUrl, apiKey, searchParam, searchParamLontitude) {
       pressure.innerHTML = `${Math.round(data.main.pressure)} hPa`;
       const coordLon = data.coord.lon;
       const coordLat = data.coord.lat;
-      cityName.innerHTML = `${data.name}, ${today}`;
+      cityName.innerHTML = `<span class="cityOnly">${data.name}</span>, ${today}`;
+
       // console.log(coordLon + " ///" + coordLat);
       fetch(
         `https://api.openweathermap.org/data/2.5/air_pollution?lat=${coordLat}&lon=${coordLon}&appid=f2799a9007994daa45c68492bae50498`
@@ -125,7 +117,7 @@ function changePostal(apiUrl, apiKey, searchParam) {
     .then((data) => {
       console.log(data);
       const cityFromPostal = data.results[searchParam.value][0].city;
-      cityName.innerHTML = `${cityFromPostal}, ${today}`;
+      cityName.innerHTML = `<span class="cityOnly">${cityFromPostal}</span>, ${today}`;
       fetch(apiUrl + cityFromPostal + apiKey)
         .then((response) => {
           return response.json();

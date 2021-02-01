@@ -16,8 +16,19 @@ html {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  height: calc(100vh - 108.2px);
   .city {
     color: white;
+  }
+  .time {
+    padding: 0;
+    margin: 0;
+    left: 5px;
+    bottom: 5px;
+    p {
+      padding: 0;
+      margin: 0;
+    }
   }
   .city::first-letter {
     text-transform: uppercase;
@@ -39,14 +50,26 @@ html {
   .navbar-brand {
     font-size: 2rem;
   }
+  .bg {
+    height: calc(100vh - 90.2px);
+  }
 }
 @media (max-width: 768px) {
   .navbar-brand {
     font-size: 1.5rem;
   }
+  .bg {
+    height: 100vh;
+  }
+  .time {
+    font-size: 0.9rem;
+  }
 }
 @media (max-width: 576px) {
   .city {
+    font-size: 0.8rem;
+  }
+  .time {
     font-size: 0.8rem;
   }
 }
