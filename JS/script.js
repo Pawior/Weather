@@ -18,7 +18,7 @@ import { apiKey } from "../data/config.js";
 console.log(apiKey);
 const key = apiKey;
 // counter variables
-let startMinutes = 1;
+let startMinutes = 5;
 let timeCounter = startMinutes * 60;
 const timer = document.querySelector(".time p");
 // End of variables
