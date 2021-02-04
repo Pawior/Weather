@@ -1,0 +1,23 @@
+{
+  "name": "WeatherApp",
+  "version": "1.0.0",
+  "description": "* [General info](#general-info)\r * [Apperance](#how-does-it-looks-like?)\r * [Features](#features)\r * [Technologies](#technologies)\r * [Sources](#sources)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pawior/Weather.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pawior/Weather/issues"
+  },
+  "homepage": "https://github.com/Pawior/Weather#readme",
+  "dependencies": {
+    "cypress": "^6.4.0"
+  }
+}
